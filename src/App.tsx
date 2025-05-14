@@ -15,39 +15,45 @@ import LinkedinImg from "./assets/linkedin.svg";
 import FooterImg from "./assets/footer.svg";
 
 import "../src/styles/index.css";
+import DarkModeToggle from "./Components/DarkModeToggle";
 
-export default function App() {
+import { useLanguage } from "./contexts/Language";
+import LanguageToggle from "./Components/LanguageToggle";
+
+export default function App() {    
+const { texts } = useLanguage();
+
   return (
-    <div className="min-h-screen flex flex-col bg-white overflow-hidden">
-      <header className="flex justify-between items-center mx-4 sm:mx-8 md:mx-24 min-h-14">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 overflow-hidden transition-colors duration-200">
+      <header className="flex justify-between items-center mx-4 sm:mx-8 md:mx-24 min-h-24">
         <div className="flex items-center">
           <Lightning size={18} weight="fill" color="#FACC15" />
           <p className="text-xl font-medium ml-2">S. Silva</p>
         </div>
-        <div className="sm:ml-11">
+        <div className="flex items-center gap-4 sm:ml-11">
+          <DarkModeToggle/>
+          <LanguageToggle /> 
           <Dropdown />
         </div>
       </header>
-      <section className="flex flex-col items-center text-center mx-4 sm:mx-8 md:mx-20 px-4 sm:px-8 md:px-12 py-8 sm:py-10 gap-3 rounded-3xl shadow-2xl shadow-blue-400 bg-gradient-to-b from-indigo-800 to-blue-500">
-        <p className="text-2xl sm:text-3xl text-gray-200">
-          Olá, eu sou o Lucas!
+      <section className="flex flex-col items-center text-center mx-4 sm:mx-8 md:mx-20 px-4 sm:px-8 md:px-12 py-8 sm:py-10 gap-6 rounded-3xl shadow-2xl shadow-blue-400 dark:shadow-red-500 bg-gradient-to-b from-indigo-800 to-blue-500 dark:from-red-900 dark:to-rose-500">
+        <p className="text-3xl sm:text-4xl text-gray-200">
+          {texts.greeting}
         </p>
         <p className="text-3xl sm:text-5xl text-gray-200 font-medium">
-          Me dedico a transformar{" "}
-          <span className="text-yellow-400">ideias</span> criativas em soluções
-          que contribuem para um mundo melhor. Explore meu portfólio para ver
-          como faço isso acontecer.
+          {texts.description}{" "}
+          <span className="text-yellow-400">{texts.descriptionIdeas}</span> {texts.descriptionText}
         </p>
         <div className="flex gap-4 mt-4">
-          <div className="flex justify-center items-center h-8 w-20 rounded-2xl text-slate-100 bg-black cursor-pointer">
+          <div className="flex justify-center items-center h-8 w-24 rounded-2xl text-slate-100 bg-black cursor-pointer">
             <a href="https://wa.me/5511982955188" className="cursor-pointer">
-              Contato
+              {texts.contact}
             </a>
           </div>
           <div className="flex items-center gap-1 cursor-pointer">
             <a
-              href="/Lucas-Santos/CV_Lucas-Silva.pdf"
-              download="CV_Lucas-Silva.pdf"
+              href="/Lucas-Santos/CVLucas_Santos.pdf"
+              download="CVLucas_Santos.pdf"
             >
               Download CV
             </a>
@@ -55,11 +61,9 @@ export default function App() {
           </div>
         </div>
       </section>
-      <div className="flex justify-center place-items-center mt-8">
+      <div className="flex justify-center place-items-center mt-14">
         <p className="font-medium text-3xl sm:text-4xl md:text-5xl">
-          Últimos
-          <br />
-          Projetos
+          {texts.latestProjects}
         </p>
       </div>
       <div className="flex justify-center place-items-center py-6 sm:py-10 px-4 sm:px-8 md:px-24">
@@ -67,33 +71,28 @@ export default function App() {
       </div>
       <section className="text-center sm:text-left mx-4 sm:mx-8 md:mx-24 mt-8 mb-4">
         <p className="text-3xl sm:text-4xl md:text-5xl font-medium">
-          Sobre
-          <br />
-          Mim
+           {texts.aboutMe}
         </p>
       </section>
       <div className="flex flex-col md:flex-row justify-between px-4 sm:px-8 md:px-24 gap-4 ">
         <div className="flex flex-row h-fit gap-4">
-          <div className="flex min-w-1 bg-black" />
+          <div className="flex min-w-1 bg-black dark:bg-gray-300" />
           <p className="text-left">
-            Sou um programador de 23 anos, com dois anos e meio de experiência
-            em desenvolvimento de software, especializando-me em Python e
-            JavaScript.
+            {texts.aboutText}
             <br />
-            Tenho um histórico comprovado na entrega de projetos
+            {texts.aboutText2}
             <br />
-            de alta qualidade que atendem ou superam as expectativas.
+            {texts.aboutText3}
             <br />
             <br />
-            Fiz este portfólio para detalhar a minha jornada e mostrar que com
-            foco,
+            {texts.aboutText4}
             <br />
-            criatividade e um crescimento exponencial do conhecimento,
-            <br />é possível fazer tudo com a programação.
+            {texts.aboutText5}
+            <br />{texts.aboutText6}
           </p>
         </div>
-        <div className="flex flex-col w-fit md:mt-20 gap-4 mb-5 sm:flex self-center">
-          <p className="text-3xl sm:text-4xl md:text-5xl font-medium">Skills</p>
+        <div className="flex flex-col w-fit md:mt-20 gap-4 mb-12 sm:flex self-center">
+          <p className="text-3xl sm:text-4xl md:text-5xl font-medium">{texts.skills}</p>
           <div className="flex gap-14">
             <SkillComponent
               image={PythonImg}
@@ -137,15 +136,15 @@ export default function App() {
         </div>
       </div>
 
-      <footer className="flex flex-col md:flex-row justify-between h-auto md:h-96 min-w-screen px-4 sm:px-8 md:px-24 py-8 sm:py-12 md:py-16 rounded-t-3xl bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400">
+      <footer className="flex flex-col md:flex-row justify-between h-auto md:h-96 min-w-screen px-4 sm:px-8 md:px-24 py-8 sm:py-12 md:py-16 rounded-t-3xl bg-gradient-to-r from-blue-800 via-blue-500  dark:from-red-600 ">
         <div className="flex flex-col gap-2">
           <p className="text-3xl sm:text-4xl md:text-5xl text-white">
-            Tem alguma
+                {texts.haveAn}
             <br />
-            ideia?
+                {texts.idea}
           </p>
           <p className="text-base sm:text-xl text-white">
-            Vamos construí-la juntos!
+            {texts.footerSubtitle}
           </p>
           <div className="w-fit border-b border-white py-1">
             <a href="mailto:LucasSantos3005@proton.me">
@@ -156,7 +155,7 @@ export default function App() {
           </div>
           <div className="flex gap-4 mt-2 items-center">
             <a
-              href="https://github.com/LightiningLucas"
+              href="https://github.com/Lucasslva/Lucas-Santos"
               className="flex p-2 rounded-lg bg-white cursor-pointer"
             >
               <img src={GithubImg} alt="Github" loading="lazy" />

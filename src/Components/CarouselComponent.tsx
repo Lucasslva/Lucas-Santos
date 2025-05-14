@@ -5,7 +5,6 @@ import LastProjects from "./LastProjects";
 
 export default function CarouselComponent() {
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
@@ -50,7 +49,7 @@ export default function CarouselComponent() {
             project="Em Breve"
             tech="React"
             image=""
-            bgColor="bg-gray-300"
+            bgColor="bg-gray-300 dark:text-gray-200"
           />
         </div>
         <div className="flex justify-center items-center">
@@ -58,7 +57,7 @@ export default function CarouselComponent() {
             project="Em Breve"
             tech="React"
             image=""
-            bgColor="bg-gray-300"
+            bgColor="bg-gray-300 dark:text-gray-200"
           />
         </div>
         <div className="flex justify-center items-center">
@@ -66,7 +65,7 @@ export default function CarouselComponent() {
             project="Em Breve"
             tech="React"
             image=""
-            bgColor="bg-gray-300"
+            bgColor="bg-gray-300 dark:text-gray-200"
           />
         </div>
         <div className="flex justify-center items-center">
@@ -74,7 +73,7 @@ export default function CarouselComponent() {
             project="Em Breve"
             tech="React"
             image=""
-            bgColor="bg-gray-300"
+            bgColor="bg-gray-300 dark:text-gray-200"
           />
         </div>
       </Slider>
